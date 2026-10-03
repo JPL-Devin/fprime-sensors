@@ -5,6 +5,7 @@
 // ======================================================================
 
 #include "fprime-sensors/MpuImu/Components/ImuManager/ImuManager.hpp"
+#include "Fw/Prm/ParamValid.hpp"
 
 namespace MpuImu {
 
@@ -26,8 +27,7 @@ void ImuManager ::parameterUpdated(FwPrmIdType id) {
         case PARAMID_ACCELEROMETER_RANGE: {
             // Read back the parameter value
             const AccelerationRange range = this->paramGet_ACCELEROMETER_RANGE(isValid);
-            // NOTE: isValid is always VALID in parameterUpdated as it was just properly set
-            FW_ASSERT(isValid == Fw::ParamValid::VALID, static_cast<FwAssertArgType>(isValid));
+            FW_ASSERT(FW_PARAM_OK(isValid), static_cast<FwAssertArgType>(isValid));
             this->log_ACTIVITY_HI_AccelerometerRangeUpdated(range);
             this->imuStateMachine_sendSignal_reconfigure();
             break;
@@ -35,8 +35,7 @@ void ImuManager ::parameterUpdated(FwPrmIdType id) {
         case PARAMID_GYROSCOPE_RANGE: {
             // Read back the parameter value
             const GyroscopeRange range = this->paramGet_GYROSCOPE_RANGE(isValid);
-            // NOTE: isValid is always VALID in parameterUpdated as it was just properly set
-            FW_ASSERT(isValid == Fw::ParamValid::VALID, static_cast<FwAssertArgType>(isValid));
+            FW_ASSERT(FW_PARAM_OK(isValid), static_cast<FwAssertArgType>(isValid));
             this->log_ACTIVITY_HI_GyroscopeRangeUpdated(range);
             this->imuStateMachine_sendSignal_reconfigure();
             break;

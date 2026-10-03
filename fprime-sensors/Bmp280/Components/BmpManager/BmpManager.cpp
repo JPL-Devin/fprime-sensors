@@ -5,6 +5,7 @@
 // ======================================================================
 
 #include "fprime-sensors/Bmp280/Components/BmpManager/BmpManager.hpp"
+#include "Fw/Prm/ParamValid.hpp"
 #include <cmath>
 
 namespace Bmp280 {
@@ -26,14 +27,14 @@ void BmpManager ::parameterUpdated(FwPrmIdType id) {
     switch (id) {
         case PARAMID_PRESSURE_OVERSAMPLING: {
             const PressureOversampling oversampling = this->paramGet_PRESSURE_OVERSAMPLING(isValid);
-            FW_ASSERT(isValid == Fw::ParamValid::VALID, static_cast<FwAssertArgType>(isValid));
+            FW_ASSERT(FW_PARAM_OK(isValid), static_cast<FwAssertArgType>(isValid));
             this->log_ACTIVITY_HI_PressureOversamplingUpdated(oversampling);
             this->m_state = CONFIGURE;
             break;
         }
         case PARAMID_TEMPERATURE_OVERSAMPLING: {
             const TemperatureOversampling oversampling = this->paramGet_TEMPERATURE_OVERSAMPLING(isValid);
-            FW_ASSERT(isValid == Fw::ParamValid::VALID, static_cast<FwAssertArgType>(isValid));
+            FW_ASSERT(FW_PARAM_OK(isValid), static_cast<FwAssertArgType>(isValid));
             this->log_ACTIVITY_HI_TemperatureOversamplingUpdated(oversampling);
             this->m_state = CONFIGURE;
             break;
