@@ -12,6 +12,8 @@ register_fprime_module(
     SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/Rfm69Sim.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/Rfm69SimModel.cpp"
+    DEPENDS
+        fprime-sensors_Rfm69_Components_Rfm69Manager
 )
 
 register_fprime_ut(
@@ -20,4 +22,6 @@ register_fprime_ut(
     SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/test/ut/Rfm69SimModelTestMain.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/Rfm69SimModel.cpp"
+    DEPENDS
+        fprime-sensors_Rfm69_Components_Rfm69Manager
 )
